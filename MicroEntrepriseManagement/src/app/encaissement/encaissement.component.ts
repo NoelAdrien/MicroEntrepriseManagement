@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SyntheseFacturationModel } from '../shared/Models/SyntheseFacturationModel';
+import { FacturationService } from '../shared/Services/facturation-service.service';
 
 @Component({
   selector: 'app-encaissement',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EncaissementComponent implements OnInit {
 
-  constructor() { }
+  public syntheseFacturations: Array<SyntheseFacturationModel>;
+
+  constructor(private facturationService: FacturationService) {
+    this.facturationService.getFactures().subscribe(syntheseFactures => this.syntheseFacturations = syntheseFactures);
+  }
 
   ngOnInit(): void {
   }

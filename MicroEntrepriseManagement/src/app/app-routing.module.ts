@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EncaissementComponent } from './encaissement/encaissement.component';
 
 const routes: Routes = [
+  {path: '', component: DashboardComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'encaissement', component: EncaissementComponent},
 ];
