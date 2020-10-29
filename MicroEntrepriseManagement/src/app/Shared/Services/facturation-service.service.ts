@@ -14,13 +14,13 @@ export class FacturationService {
     var syntheseFacturations: Array<SyntheseFacturationModel> = new Array<SyntheseFacturationModel>();
     syntheseFacturations.push(
       new SyntheseFacturationModel(
-        '1', new FactureModel('Facture Janvier 2020', new Date(2020, 1, 30), new Date(2020, 2, 20), 5000)
+        '1', new FactureModel('Facture Janvier 2020', new Date(2020, 0, 30), new Date(2020, 1, 20), 5000)
       ),
       new SyntheseFacturationModel(
-        '2', new FactureModel('Facture Février 2020', new Date(2020, 2, 24), new Date(2020, 3, 20), 3500)
+        '2', new FactureModel('Facture Février 2020', new Date(2020, 1, 24), new Date(2020, 2, 20), 3500)
       ),
       new SyntheseFacturationModel(
-        '3', new FactureModel('Facture Mars 2020', new Date(2020, 3, 24), new Date(2020, 4, 20), 4210)
+        '3', new FactureModel('Facture Mars 2020', new Date(2020, 2, 24), new Date(2020, 3, 20), 4210)
       )
     );
 

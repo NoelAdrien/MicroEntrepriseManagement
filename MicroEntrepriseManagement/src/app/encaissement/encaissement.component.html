@@ -2,7 +2,8 @@
     <thead>
         <tr class="header-tab-blue">
             <th scope="col">Id</th>
-            <th scope="col">Nom</th>
+            <th scope="col">Date facturation</th>
+            <th scope="col">Date encaissement</th>
             <th scope="col">Facture HT</th>
             <th scope="col">Montant TVA</th>
             <th scope="col">Facture TTC</th>
@@ -15,14 +16,15 @@
     <tbody>
         <tr *ngFor="let factSynthese of syntheseFacturations">
             <th scope="row">{{factSynthese.id}}</th>
-            <th>{{factSynthese.facture.name}}</th>
-            <td>{{factSynthese.facture.montantHorsTaxe}} €</td>
-            <td>{{factSynthese.tva.montant}} €</td>
-            <td>{{factSynthese.facture.montantTtc}} €</td>
-            <td>{{factSynthese.chargesSociales.montant}} €</td>
-            <td>{{factSynthese.impotRevenu.montant}} €</td>
-            <td>{{factSynthese.chargesTotales}} €</td>
-            <td>{{factSynthese.benefices}} €</td>
+            <th>{{factSynthese.facture.dateFacturation | date: 'MMMM yyyy'}}</th>
+            <th>{{factSynthese.facture.dateEncaissement | date: 'MMMM yyyy'}}</th>
+            <td>{{factSynthese.facture.montantHorsTaxe | price}}</td>
+            <td>{{factSynthese.tva.montant | price}}</td>
+            <td>{{factSynthese.facture.montantTtc | price}}</td>
+            <td>{{factSynthese.chargesSociales.montant | price}}</td>
+            <td>{{factSynthese.impotRevenu.montant | price}}</td>
+            <td>{{factSynthese.chargesTotales | price}}</td>
+            <td>{{factSynthese.benefices | price}}</td>
         </tr>
     </tbody>
 </table>
