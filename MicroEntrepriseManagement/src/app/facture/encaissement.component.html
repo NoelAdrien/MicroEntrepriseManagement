@@ -38,16 +38,9 @@
                     Modifier
                 </button>
             </td>
-            <td><button type="button" class="btn btn-danger">Supprimer</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteFacture(factSynthese)">Supprimer</button></td>
         </tr>
     </tbody>
 </table>
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-target="#exampleModal">
-    Launch demo modal
-</button>
-
-
-<app-facture-form *ngIf="selectedFacture" [syntheseFacture]="selectedFacture"></app-facture-form>
+<app-facture-form *ngIf="selectedFacture" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture"></app-facture-form>

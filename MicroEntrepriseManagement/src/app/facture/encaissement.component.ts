@@ -21,11 +21,15 @@ export class EncaissementComponent implements OnInit {
   }
 
   public selectFactureForm(facture: SyntheseFacturationModel = null): void {
-    this.isActionAdd = facture === null;
+    this.isActionAdd = facture == null;
     if (facture === null) {
       facture = new SyntheseFacturationModel();
     }
-    
+
     this.selectedFacture = facture;
+  }
+
+  public deleteFacture(syntheseFacture: SyntheseFacturationModel): void {
+    this.facturationService.deleteFacture(syntheseFacture);
   }
 }

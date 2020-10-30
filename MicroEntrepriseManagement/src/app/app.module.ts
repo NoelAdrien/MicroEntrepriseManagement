@@ -31,7 +31,7 @@ registerLocaleData(localeFr);
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: "fr-FR" }],
   bootstrap: [AppComponent]

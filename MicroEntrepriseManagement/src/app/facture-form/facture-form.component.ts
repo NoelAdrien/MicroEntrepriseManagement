@@ -19,9 +19,11 @@ export class FactureFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public updateFacture(): void {
-    var factures: SyntheseFacturationModel[];
-    this.facturationService.getFactures().subscribe(syntheseFactures => factures = syntheseFactures);
+  public addFacture(): void {
+    this.facturationService.addFacture(this.syntheseFacture);
   }
 
+  public updateFacture(): void {
+    this.facturationService.updateFacture(this.syntheseFacture);
+  }
 }
