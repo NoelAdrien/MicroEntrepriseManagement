@@ -1,3 +1,10 @@
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#factureModal" (click)="selectFactureForm()">
+    Ajouter
+</button>
+
+<br />
+<br />
 <table class="table table-hover">
     <thead>
         <tr class="header-tab-blue">
@@ -11,6 +18,8 @@
             <th scope="col">Impôt revenu</th>
             <th scope="col">Charges totales</th>
             <th scope="col">Bénéfices</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +34,20 @@
             <td>{{factSynthese.impotRevenu.montant | price}}</td>
             <td>{{factSynthese.chargesTotales | price}}</td>
             <td>{{factSynthese.benefices | price}}</td>
+            <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#factureModal" (click)="selectFactureForm(factSynthese)">
+                    Modifier
+                </button>
+            </td>
+            <td><button type="button" class="btn btn-danger">Supprimer</button></td>
         </tr>
     </tbody>
 </table>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-target="#exampleModal">
+    Launch demo modal
+</button>
+
+
+<app-facture-form *ngIf="selectedFacture" [syntheseFacture]="selectedFacture"></app-facture-form>
