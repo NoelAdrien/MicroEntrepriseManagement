@@ -1,0 +1,66 @@
+<h2>Factures</h2>
+<br />
+
+<!-- FILTERS -->
+<div>
+    <div style="float: right;">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#factureModal"
+            (click)="selectFactureForm()">
+            Ajouter
+        </button>
+    </div>
+    <div style="float: left;">
+        <select style="float: left;" class="custom-select" [(ngModel)]="selectedYear" (ngModelChange)="loadFactures()">
+            <option *ngFor="let annee of anneeFactures" [ngValue]="annee">{{annee}}</option>
+        </select>
+        <div style="float: left; margin-top: 7px; margin-left: 10px;" class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="isDateEncaissement" (ngModelChange)="loadFactures()">
+            <label *ngIf="isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date d'encaissement</label>
+            <label *ngIf="!isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date de facturation</label>
+        </div>
+    </div>
+</div>
+
+<!-- TABLES -->
+<table *ngIf="syntheseFacturations" class="table table-hover">
+    <thead>
+        <tr class="header-tab-blue">
+            <th scope="col">Id</th>
+            <th scope="col">Date facturation</th>
+            <th scope="col">Date encaissement</th>
+            <th scope="col">Facture HT</th>
+            <th scope="col">Montant TVA</th>
+            <th scope="col">Facture TTC</th>
+            <th scope="col">Charges Sociales</th>
+            <th scope="col">Impôt revenu</th>
+            <th scope="col">Charges totales</th>
+            <th scope="col">Bénéfices</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let factSynthese of syntheseFacturations">
+            <th scope="row">{{factSynthese.id}}</th>
+            <th>{{factSynthese.facture.dateFacturation | date: 'MMMM yyyy'}}</th>
+            <th>{{factSynthese.facture.dateEncaissement | date: 'MMMM yyyy'}}</th>
+            <td>{{factSynthese.facture.montantHorsTaxe | price}}</td>
+            <td>{{factSynthese.tva.montant | price}}</td>
+            <td>{{factSynthese.facture.montantTtc | price}}</td>
+            <td>{{factSynthese.chargesSociales.montant | price}}</td>
+            <td>{{factSynthese.impotRevenu.montant | price}}</td>
+            <td>{{factSynthese.chargesTotales | price}}</td>
+            <td>{{factSynthese.benefices | price}}</td>
+            <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#factureModal"
+                    (click)="selectFactureForm(factSynthese)">
+                    Modifier
+                </button>
+            </td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteFacture(factSynthese)">Supprimer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<app-facture-form *ngIf="selectedFacture" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture">
+</app-facture-form>

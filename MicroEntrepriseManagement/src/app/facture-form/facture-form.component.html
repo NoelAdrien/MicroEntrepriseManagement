@@ -1,0 +1,76 @@
+<!-- Modal -->
+<div class="modal fade" id="factureModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 *ngIf="isActionAdd" class="modal-title" id="exampleModalLabel">Ajouter une facture</h5>
+                <h5 *ngIf="!isActionAdd" class="modal-title" id="exampleModalLabel">Modifier la facture</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="identifiant-facture">Identifiant</label>
+                        <input type="number" class="form-control" id="identifiant-facture" placeholder="identifiant"
+                            [(ngModel)]="syntheseFacture.id" name="identifiant-facture">
+                    </div>
+                    <div class="form-group">
+                        <label for="nom-facture">Nom facture</label>
+                        <input type="text" class="form-control" id="nom-facture" placeholder="nom"
+                            [(ngModel)]="syntheseFacture.facture.name" name="nom-facture">
+                    </div>
+                    <!-- Gestion des dates -->
+                    <!-- Ajout -->
+                    <div *ngIf="isActionAdd">
+                        <div class="form-group">
+                            <label for="date-facturation">Date de facturation</label>
+                            <input type="date" class="form-control" id="date-facturation"
+                                placeholder="date de facturation" name="date-facturation"
+                                [(ngModel)]="syntheseFacture.facture.dateFacturation">
+                        </div>
+                        <div class="form-group">
+                            <label for="date-encaissement">Date encaissement</label>
+                            <input type="date" class="form-control" id="date-encaissement"
+                                placeholder="date encaissement facture"
+                                [(ngModel)]="syntheseFacture.facture.dateEncaissement" name="date-encaissement">
+                        </div>
+                    </div>
+                    <!-- Modification -->
+                    <div *ngIf="!isActionAdd">
+                        <div class="form-group">
+                            <label for="date-facturation">Date de facturation</label>
+                            <input type="text" class="form-control" id="date-facturation"
+                                placeholder="date de facturation" name="date-facturation"
+                                [ngModel] ="syntheseFacture.facture.dateFacturation | date:'dd/MM/yyyy'" 
+                                (ngModelChange)="formatDate($event, true)">
+                        </div>
+                        <div class="form-group">
+                            <label for="date-encaissement">Date encaissement</label>
+                            <input type="text" class="form-control" id="date-encaissement"
+                                placeholder="date encaissement facture"
+                                name="date-encaissement"
+                                [ngModel] ="syntheseFacture.facture.dateEncaissement | date:'dd/MM/yyyy'" 
+                                (ngModelChange)="formatDate($event, false)">
+                        </div>
+                    </div>
+                    <!-- FIN Gestion des dates -->
+                    <div class="form-group">
+                        <label for="montant-facture">Montant HT</label>
+                        <input type="number" class="form-control" id="montant-facture" placeholder="montant HT"
+                            [(ngModel)]="syntheseFacture.facture.montantHorsTaxe" name="montant-facture">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button *ngIf="isActionAdd" (click)="addFacture()" type="button" class="btn btn-primary"
+                    data-dismiss="modal">Ajouter</button>
+                <button *ngIf="!isActionAdd" (click)="updateFacture()" type="button" class="btn btn-primary"
+                    data-dismiss="modal">Modifier</button>
+            </div>
+        </div>
+    </div>
+</div>

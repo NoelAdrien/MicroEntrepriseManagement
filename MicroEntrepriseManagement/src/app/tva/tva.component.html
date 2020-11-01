@@ -1,0 +1,59 @@
+<h2>Gestion de la déclaration de TVA</h2>
+<br />
+
+<div>
+    <div style="float: left;">
+        <select style="float: left;" class="custom-select" [(ngModel)]="selectedYear" (ngModelChange)="loadFactures()">
+            <option *ngFor="let annee of anneeFactures" [ngValue]="annee">{{annee}}</option>
+        </select>
+    </div>
+
+    <!-- TABLES -->
+    <!-- <table *ngIf="syntheseFacturations" class="table table-hover"> -->
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Date encaissement</th>
+                <th scope="col">Facture HT</th>
+                <th scope="col">Montant TVA</th>
+                <th scope="col">Facture TTC</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let factSynthese of syntheseFacturations">
+                <th scope="row">{{factSynthese.id}}</th>
+                <th>{{factSynthese.facture.dateEncaissement | date: 'MMMM yyyy'}}</th>
+                <td>{{factSynthese.facture.montantHorsTaxe | price}}</td>
+                <td>{{factSynthese.tva.montant | price}}</td>
+                <td>{{factSynthese.facture.montantTtc | price}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+
+    <!-- Affichage détail déclaration tva -->
+    <div id="detailTva" style="width: 27%; margin-left: auto; margin-right: auto;">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" (click)="getFacturesTrimestre(1)">1er Trimestre</button>
+            <button type="button" class="btn btn-secondary" (click)="getFacturesTrimestre(2)">2iem Trimestre</button>
+            <button type="button" class="btn btn-secondary" (click)="getFacturesTrimestre(3)">3iem Trimestre</button>
+            <button type="button" class="btn btn-secondary" (click)="getFacturesTrimestre(4)">4iem Trimestre</button>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Déclaration TVA
+            </div>
+            <div class="card-body">
+                <h6 class="card-title">Déclaration du trimestre N° {{selectedTrimestre}} </h6>
+                <p class="card-text" *ngFor="let factureTrimestre of facturesTrimestre">
+                    <span>{{factureTrimestre.facture.dateEncaissement | date: 'MMMM yyyy'}}
+                        Montant TVA : <b>{{factureTrimestre.tva.montant | price}}</b>
+                    </span>
+                </p>
+                <span>Total : <b>{{totalTva | price}}</b></span>
+            </div>
+        </div>
+    </div>
+</div>

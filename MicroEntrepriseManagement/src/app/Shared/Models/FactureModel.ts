@@ -1,4 +1,6 @@
 export class FactureModel {
+    constructor() {
+    }
     public name: string;
     public dateFacturation: Date;
     public dateEncaissement: Date;
