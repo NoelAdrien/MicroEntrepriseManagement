@@ -26,4 +26,13 @@ export class FactureFormComponent implements OnInit {
   public updateFacture(): void {
     this.facturationService.updateFacture(this.syntheseFacture);
   }
+
+  public formatDate(event: string, isDateFacturation: boolean): void {
+    var dates: any[] = event.split('/');
+    if (isDateFacturation) {
+      this.syntheseFacture.facture.dateFacturation = new Date(dates[2] as number, dates[1] as number - 1, dates[0] as number);
+    } else {
+      this.syntheseFacture.facture.dateEncaissement = new Date(dates[2] as number, dates[1] as number - 1, dates[0] as number);
+    }
+  }
 }

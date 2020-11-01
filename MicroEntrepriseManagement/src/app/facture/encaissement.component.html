@@ -1,11 +1,26 @@
+<!-- FILTERS -->
+<div>
+    <div style="float: right;">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#factureModal"
+            (click)="selectFactureForm()">
+            Ajouter
+        </button>
+    </div>
+    <div style="float: left;">
+        <select style="float: left;" class="custom-select" [(ngModel)]="selectedYear" (ngModelChange)="loadFactures()">
+            <!-- <option selected>Open this select menu</option> -->
+            <option *ngFor="let annee of anneeFactures" [ngValue]="annee">{{annee}}</option>
+        </select>
+        <div style="float: left; margin-top: 7px; margin-left: 10px;" class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="isDateEncaissement" (ngModelChange)="loadFactures()">
+            <label *ngIf="isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date d'encaissement</label>
+            <label *ngIf="!isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date de facturation</label>
+        </div>
+    </div>
+</div>
 
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#factureModal" (click)="selectFactureForm()">
-    Ajouter
-</button>
-
-<br />
-<br />
-<table class="table table-hover">
+<!-- TABLES -->
+<table *ngIf="syntheseFacturations" class="table table-hover">
     <thead>
         <tr class="header-tab-blue">
             <th scope="col">Id</th>
@@ -34,13 +49,16 @@
             <td>{{factSynthese.impotRevenu.montant | price}}</td>
             <td>{{factSynthese.chargesTotales | price}}</td>
             <td>{{factSynthese.benefices | price}}</td>
-            <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#factureModal" (click)="selectFactureForm(factSynthese)">
+            <td><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#factureModal"
+                    (click)="selectFactureForm(factSynthese)">
                     Modifier
                 </button>
             </td>
-            <td><button type="button" class="btn btn-danger" (click)="deleteFacture(factSynthese)">Supprimer</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteFacture(factSynthese)">Supprimer</button>
+            </td>
         </tr>
     </tbody>
 </table>
 
-<app-facture-form *ngIf="selectedFacture" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture"></app-facture-form>
+<app-facture-form *ngIf="selectedFacture" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture">
+</app-facture-form>
