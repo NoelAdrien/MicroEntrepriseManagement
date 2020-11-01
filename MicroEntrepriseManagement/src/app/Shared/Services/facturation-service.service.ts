@@ -57,7 +57,7 @@ export class FacturationService {
     syntheseFacturation.facture = new FactureModel();
     syntheseFacturation.facture.name = 'Facture Mars 2020';
     syntheseFacturation.facture.dateFacturation = new Date(2020, 2, 24);
-    syntheseFacturation.facture.dateEncaissement = new Date(2020, 3, 20);
+    syntheseFacturation.facture.dateEncaissement = new Date(2020, 4, 20);
     syntheseFacturation.facture.montantHorsTaxe = 4210;
     this.syntheseFactures.push(syntheseFacturation);
 
@@ -65,7 +65,6 @@ export class FacturationService {
       this.fillMontantsFacture(syntheseFacture);
     })
 
-    console.log('facturation service LENGTH :', this.syntheseFactures.length)
     return of(this.syntheseFactures);
   }
 
@@ -97,5 +96,22 @@ export class FacturationService {
     if (indexDelete > -1) {
       this.syntheseFactures.splice(indexDelete, 1);
     }
+  }
+
+  public getAnneeFactures(): Observable<Array<number>> {
+    var anneeFactures = new Array<number>();
+    this.syntheseFactures.forEach(syntheseFactures => {
+      var anneeFacture = syntheseFactures.facture.dateFacturation.getFullYear();
+      var anneeEncaissement = syntheseFactures.facture.dateEncaissement.getFullYear();
+      if (anneeFactures.filter(x => x === anneeFacture).length === 0) {
+        anneeFactures.push(anneeFacture);
+      }
+      if (anneeFactures.filter(x => x === anneeEncaissement).length === 0) {
+        anneeFactures.push(anneeEncaissement);
+      }
+    });
+    anneeFactures.sort(((a, b) => b - a));
+
+    return of(anneeFactures);
   }
 }

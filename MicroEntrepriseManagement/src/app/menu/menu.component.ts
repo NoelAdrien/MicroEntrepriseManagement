@@ -22,7 +22,8 @@ export class MenuComponent implements OnInit {
   public initMenus(): void {
     this.menus = [
       new MenuModel('Dashboard', 'dashboard'),
-      new MenuModel('Encaissement facturation', 'encaissement'),
+      new MenuModel('Facturation', 'encaissement'),
+      new MenuModel('TVA', 'tva'),
     ];
   }
 

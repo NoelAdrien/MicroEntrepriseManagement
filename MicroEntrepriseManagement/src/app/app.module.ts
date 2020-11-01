@@ -15,6 +15,7 @@ import { FactureFormComponent } from './facture-form/facture-form.component';
 import { PricesPipe } from './shared/Pipes/PricesPipe';
 
 import localeFr from '@angular/common/locales/fr';
+import { TvaComponent } from './tva/tva.component';
 
 registerLocaleData(localeFr);
 
@@ -25,7 +26,8 @@ registerLocaleData(localeFr);
     MenuComponent,
     EncaissementComponent,
     PricesPipe,
-    FactureFormComponent
+    FactureFormComponent,
+    TvaComponent
   ],
   imports: [
     BrowserAnimationsModule,
