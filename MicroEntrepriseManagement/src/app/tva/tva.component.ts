@@ -12,9 +12,12 @@ export class TvaComponent implements OnInit {
   public syntheseFacturations: Array<SyntheseFacturationModel>;
   public anneeFactures: Array<number>;
   public selectedYear: number;
+
+  // Détails de la tva 
   public facturesTrimestre: Array<SyntheseFacturationModel>;
   public selectedTrimestre: number;
   public totalTva: number;
+  public dateDeclarationTva: Date;
 
   constructor(private facturationService: FacturationService) {
     this.selectedYear = 0;
@@ -30,6 +33,7 @@ export class TvaComponent implements OnInit {
     this.syntheseFacturations = this.getFactures();
     this.fillAnneeFactures();
     this.applyFiltresTypeFacture();
+    this.getFacturesTrimestre(1);
   }
 
   public getFactures(): Array<SyntheseFacturationModel> {
@@ -70,6 +74,28 @@ export class TvaComponent implements OnInit {
         this.facturesTrimestre.push(syntheseFacture);
       }
     });
+  }
+
+  public setTvaPayee(): void {
+    this.facturesTrimestre.forEach(syntheseFacture => {
+      syntheseFacture.tva.isPayee = true;
+    });
+  }
+
+  public getInformationTva(factSynthese: SyntheseFacturationModel): string {
+    var numMonth = factSynthese.facture.dateEncaissement.getMonth();
+    switch (numMonth) {
+      case 0:
+        return `Déclaration TVA 4iem trimestre ${this.selectedYear - 1}`;
+      case 3:
+        return `Déclaration TVA 1er trimestre ${this.selectedYear}`;
+      case 6:
+        return `Déclaration TVA 2iem trimestre ${this.selectedYear}`;
+      case 9:
+        return `Déclaration TVA 3iem trimestre ${this.selectedYear}`;
+      default:
+        return '-';
+    }
   }
 
 }

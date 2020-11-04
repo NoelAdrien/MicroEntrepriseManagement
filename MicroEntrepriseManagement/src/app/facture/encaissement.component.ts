@@ -17,7 +17,7 @@ export class EncaissementComponent implements OnInit {
   public isDateEncaissement: boolean;
 
   constructor(private facturationService: FacturationService) {
-    this.isDateEncaissement = false;
+    this.isDateEncaissement = true;
     this.selectedYear = 0;
     this.loadFactures();
   }

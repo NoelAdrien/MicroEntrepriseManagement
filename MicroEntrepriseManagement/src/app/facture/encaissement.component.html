@@ -29,8 +29,8 @@
             <th scope="col">Date facturation</th>
             <th scope="col">Date encaissement</th>
             <th scope="col">Facture HT</th>
-            <th scope="col">Montant TVA</th>
             <th scope="col">Facture TTC</th>
+            <th scope="col">Montant TVA</th>
             <th scope="col">Charges Sociales</th>
             <th scope="col">Impôt revenu</th>
             <th scope="col">Charges totales</th>
@@ -45,8 +45,8 @@
             <th>{{factSynthese.facture.dateFacturation | date: 'MMMM yyyy'}}</th>
             <th>{{factSynthese.facture.dateEncaissement | date: 'MMMM yyyy'}}</th>
             <td>{{factSynthese.facture.montantHorsTaxe | price}}</td>
-            <td>{{factSynthese.tva.montant | price}}</td>
             <td>{{factSynthese.facture.montantTtc | price}}</td>
+            <td>{{factSynthese.tva.montant | price}}</td>
             <td>{{factSynthese.chargesSociales.montant | price}}</td>
             <td>{{factSynthese.impotRevenu.montant | price}}</td>
             <td>{{factSynthese.chargesTotales | price}}</td>
