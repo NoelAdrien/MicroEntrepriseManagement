@@ -18,15 +18,17 @@
                 <th scope="col">Facture HT</th>
                 <th scope="col">Montant TVA</th>
                 <th scope="col">Facture TTC</th>
+                <th scope="col">Informations</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let factSynthese of syntheseFacturations">
+            <tr *ngFor="let factSynthese of syntheseFacturations" [class]="factSynthese.tva.isPayee ? 'background-green' : ''">
                 <th scope="row">{{factSynthese.id}}</th>
                 <th>{{factSynthese.facture.dateEncaissement | date: 'MMMM yyyy'}}</th>
                 <td>{{factSynthese.facture.montantHorsTaxe | price}}</td>
                 <td>{{factSynthese.tva.montant | price}}</td>
                 <td>{{factSynthese.facture.montantTtc | price}}</td>
+                <td>{{getInformationTva(factSynthese)}}</td>
             </tr>
         </tbody>
     </table>
@@ -43,10 +45,9 @@
         </div>
         <div class="card">
             <div class="card-header">
-                Déclaration TVA
+                Déclaration du trimestre N° {{selectedTrimestre}} - Date de déclaration : {{dateDeclarationTva | date: 'MMMM yyyy'}}
             </div>
             <div class="card-body">
-                <h6 class="card-title">Déclaration du trimestre N° {{selectedTrimestre}} </h6>
                 <p class="card-text" *ngFor="let factureTrimestre of facturesTrimestre">
                     <span>{{factureTrimestre.facture.dateEncaissement | date: 'MMMM yyyy'}}
                         Montant TVA : <b>{{factureTrimestre.tva.montant | price}}</b>
@@ -54,6 +55,7 @@
                 </p>
                 <span>Total : <b>{{totalTva | price}}</b></span>
             </div>
+            <button type="button" class="btn btn-primary" (click)="setTvaPayee()">Marquer comme payée</button>
         </div>
     </div>
 </div>

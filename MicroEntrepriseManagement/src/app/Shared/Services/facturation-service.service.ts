@@ -78,8 +78,10 @@ export class FacturationService {
   }
 
   public addFacture(syntheseFacture: SyntheseFacturationModel): void {
+    console.log('AV ADD nombre facture : ', this.syntheseFactures.length);
     this.fillMontantsFacture(syntheseFacture);
     this.syntheseFactures.push(syntheseFacture);
+    console.log('APP ADD nombre facture : ', this.syntheseFactures.length);
   }
 
   public updateFacture(syntheseFacture: SyntheseFacturationModel): void {
