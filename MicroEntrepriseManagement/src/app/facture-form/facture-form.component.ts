@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SyntheseFacturationModel } from '../shared/Models/SyntheseFacturationModel';
 import { FacturationService } from '../shared/Services/facturation-service.service';
 
@@ -15,12 +15,14 @@ export class FactureFormComponent implements OnInit {
 
   @Input() syntheseFacture: SyntheseFacturationModel;
   @Input() isActionAdd: boolean;
+  @Output() reloadFactureMethod = new EventEmitter<string>();
 
   ngOnInit(): void {
   }
 
   public addFacture(): void {
     this.facturationService.addFacture(this.syntheseFacture);
+    this.reloadFactureMethod.emit();
   }
 
   public updateFacture(): void {

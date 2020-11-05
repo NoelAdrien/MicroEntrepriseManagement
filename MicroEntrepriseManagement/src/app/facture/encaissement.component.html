@@ -62,5 +62,5 @@
     </tbody>
 </table>
 
-<app-facture-form *ngIf="selectedFacture" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture">
+<app-facture-form *ngIf="selectedFacture" [reloadFactureMethod]="loadFactures()" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture">
 </app-facture-form>
