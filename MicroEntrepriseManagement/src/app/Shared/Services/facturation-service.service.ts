@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FactureModel } from '../Models/FactureModel';
 import { SyntheseFacturationModel } from '../Models/SyntheseFacturationModel';
 import { Observable, of } from 'rxjs';
+import { FACTURES } from '../Mock/factures-mock';
 
 @Injectable({
   providedIn: 'root'
@@ -11,55 +12,60 @@ export class FacturationService {
   public syntheseFactures: Array<SyntheseFacturationModel>;
   constructor() {
     this.syntheseFactures = new Array<SyntheseFacturationModel>();
-   }
+  }
 
   public getFactures(): Observable<Array<SyntheseFacturationModel>> {
-    this.syntheseFactures = new Array<SyntheseFacturationModel>();
 
-    var syntheseFacturation = new SyntheseFacturationModel();
-    syntheseFacturation.id = '1';
-    syntheseFacturation.facture = new FactureModel();
-    syntheseFacturation.facture.name = 'Facture Novembre 2019';
-    syntheseFacturation.facture.dateFacturation = new Date(2019, 10, 25);
-    syntheseFacturation.facture.dateEncaissement = new Date(2020, 0 , 20);
-    syntheseFacturation.facture.montantHorsTaxe = 3500;
-    this.syntheseFactures.push(syntheseFacturation);
+    if (this.syntheseFactures.length > 0) {
+      return of(this.syntheseFactures);
+    }
 
-    var syntheseFacturation = new SyntheseFacturationModel();
-    syntheseFacturation.id = '2';
-    syntheseFacturation.facture = new FactureModel();
-    syntheseFacturation.facture.name = 'Facture décembre 2019';
-    syntheseFacturation.facture.dateFacturation = new Date(2019, 11, 25);
-    syntheseFacturation.facture.dateEncaissement = new Date(2020, 1, 20);
-    syntheseFacturation.facture.montantHorsTaxe = 4500;
-    this.syntheseFactures.push(syntheseFacturation);
-    
-    var syntheseFacturation = new SyntheseFacturationModel();
-    syntheseFacturation.id = '3';
-    syntheseFacturation.facture = new FactureModel();
-    syntheseFacturation.facture.name = 'Facture Janvier 2020';
-    syntheseFacturation.facture.dateFacturation = new Date(2020, 0, 30);
-    syntheseFacturation.facture.dateEncaissement = new Date(2020, 2, 20);
-    syntheseFacturation.facture.montantHorsTaxe = 5000;
-    this.syntheseFactures.push(syntheseFacturation);
+    // var syntheseFacturation = new SyntheseFacturationModel();
+    // syntheseFacturation.id = '1';
+    // syntheseFacturation.facture = new FactureModel();
+    // syntheseFacturation.facture.name = 'Facture Novembre 2019';
+    // syntheseFacturation.facture.dateFacturation = new Date(2019, 10, 25);
+    // syntheseFacturation.facture.dateEncaissement = new Date(2020, 0 , 20);
+    // syntheseFacturation.facture.montantHorsTaxe = 3500;
+    // this.syntheseFactures.push(syntheseFacturation);
 
-    var syntheseFacturation = new SyntheseFacturationModel();
-    syntheseFacturation.id = '4';
-    syntheseFacturation.facture = new FactureModel();
-    syntheseFacturation.facture.name = 'Facture Février 2020';
-    syntheseFacturation.facture.dateFacturation = new Date(2020, 1, 24);
-    syntheseFacturation.facture.dateEncaissement = new Date(2020, 3, 30);
-    syntheseFacturation.facture.montantHorsTaxe = 3500;
-    this.syntheseFactures.push(syntheseFacturation);
+    // var syntheseFacturation = new SyntheseFacturationModel();
+    // syntheseFacturation.id = '2';
+    // syntheseFacturation.facture = new FactureModel();
+    // syntheseFacturation.facture.name = 'Facture décembre 2019';
+    // syntheseFacturation.facture.dateFacturation = new Date(2019, 11, 25);
+    // syntheseFacturation.facture.dateEncaissement = new Date(2020, 1, 20);
+    // syntheseFacturation.facture.montantHorsTaxe = 4500;
+    // this.syntheseFactures.push(syntheseFacturation);
 
-    var syntheseFacturation = new SyntheseFacturationModel();
-    syntheseFacturation.id = '5';
-    syntheseFacturation.facture = new FactureModel();
-    syntheseFacturation.facture.name = 'Facture Mars 2020';
-    syntheseFacturation.facture.dateFacturation = new Date(2020, 2, 24);
-    syntheseFacturation.facture.dateEncaissement = new Date(2020, 4, 20);
-    syntheseFacturation.facture.montantHorsTaxe = 4210;
-    this.syntheseFactures.push(syntheseFacturation);
+    // var syntheseFacturation = new SyntheseFacturationModel();
+    // syntheseFacturation.id = '3';
+    // syntheseFacturation.facture = new FactureModel();
+    // syntheseFacturation.facture.name = 'Facture Janvier 2020';
+    // syntheseFacturation.facture.dateFacturation = new Date(2020, 0, 30);
+    // syntheseFacturation.facture.dateEncaissement = new Date(2020, 2, 20);
+    // syntheseFacturation.facture.montantHorsTaxe = 5000;
+    // this.syntheseFactures.push(syntheseFacturation);
+
+    // var syntheseFacturation = new SyntheseFacturationModel();
+    // syntheseFacturation.id = '4';
+    // syntheseFacturation.facture = new FactureModel();
+    // syntheseFacturation.facture.name = 'Facture Février 2020';
+    // syntheseFacturation.facture.dateFacturation = new Date(2020, 1, 24);
+    // syntheseFacturation.facture.dateEncaissement = new Date(2020, 3, 30);
+    // syntheseFacturation.facture.montantHorsTaxe = 3500;
+    // this.syntheseFactures.push(syntheseFacturation);
+
+    // var syntheseFacturation = new SyntheseFacturationModel();
+    // syntheseFacturation.id = '5';
+    // syntheseFacturation.facture = new FactureModel();
+    // syntheseFacturation.facture.name = 'Facture Mars 2020';
+    // syntheseFacturation.facture.dateFacturation = new Date(2020, 2, 24);
+    // syntheseFacturation.facture.dateEncaissement = new Date(2020, 4, 20);
+    // syntheseFacturation.facture.montantHorsTaxe = 4210;
+    // this.syntheseFactures.push(syntheseFacturation);
+
+    this.syntheseFactures = FACTURES;
 
     this.syntheseFactures.forEach(syntheseFacture => {
       this.fillMontantsFacture(syntheseFacture);
@@ -78,10 +84,8 @@ export class FacturationService {
   }
 
   public addFacture(syntheseFacture: SyntheseFacturationModel): void {
-    console.log('AV ADD nombre facture : ', this.syntheseFactures.length);
     this.fillMontantsFacture(syntheseFacture);
     this.syntheseFactures.push(syntheseFacture);
-    console.log('APP ADD nombre facture : ', this.syntheseFactures.length);
   }
 
   public updateFacture(syntheseFacture: SyntheseFacturationModel): void {
@@ -103,6 +107,7 @@ export class FacturationService {
   public getAnneeFactures(): Observable<Array<number>> {
     var anneeFactures = new Array<number>();
     this.syntheseFactures.forEach(syntheseFactures => {
+      console.log('GET ANNEE FACTURES', syntheseFactures.facture.dateFacturation);
       var anneeFacture = syntheseFactures.facture.dateFacturation.getFullYear();
       var anneeEncaissement = syntheseFactures.facture.dateEncaissement.getFullYear();
       if (anneeFactures.filter(x => x === anneeFacture).length === 0) {

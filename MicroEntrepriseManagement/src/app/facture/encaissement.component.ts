@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SyntheseFacturationModel } from '../shared/Models/SyntheseFacturationModel';
 import { FacturationService } from '../shared/Services/facturation-service.service';
+import { startWith, tap, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-encaissement',
@@ -26,6 +27,7 @@ export class EncaissementComponent implements OnInit {
   }
 
   public loadFactures(): void {
+    console.log('LOAD FACTURES');
     this.syntheseFacturations = this.getFactures();
     this.fillAnneeFactures();
     this.applyFiltresTypeFacture();
@@ -35,6 +37,12 @@ export class EncaissementComponent implements OnInit {
     var syntheseFactures = new Array<SyntheseFacturationModel>();
     this.facturationService.getFactures().subscribe(syntheseFacturesSource => syntheseFactures = syntheseFacturesSource);
     return syntheseFactures;
+  }
+
+  public refreshFactrures(reloadAll: boolean): void {
+    if (reloadAll) {
+      this.loadFactures();
+    }
   }
 
   public selectFactureForm(facture: SyntheseFacturationModel = null): void {

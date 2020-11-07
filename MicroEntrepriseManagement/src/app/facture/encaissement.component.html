@@ -14,9 +14,12 @@
             <option *ngFor="let annee of anneeFactures" [ngValue]="annee">{{annee}}</option>
         </select>
         <div style="float: left; margin-top: 7px; margin-left: 10px;" class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="isDateEncaissement" (ngModelChange)="loadFactures()">
-            <label *ngIf="isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date d'encaissement</label>
-            <label *ngIf="!isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date de facturation</label>
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="isDateEncaissement"
+                (ngModelChange)="loadFactures()">
+            <label *ngIf="isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date
+                d'encaissement</label>
+            <label *ngIf="!isDateEncaissement" class="custom-control-label" for="customSwitch1">Affichage par date de
+                facturation</label>
         </div>
     </div>
 </div>
@@ -62,5 +65,5 @@
     </tbody>
 </table>
 
-<app-facture-form *ngIf="selectedFacture" [reloadFactureMethod]="loadFactures()" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture">
+<app-facture-form *ngIf="selectedFacture" [isActionAdd]="isActionAdd" [syntheseFacture]="selectedFacture" (reloadFactureMethod)="refreshFactrures($event)">
 </app-facture-form>

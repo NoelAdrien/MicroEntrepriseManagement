@@ -4,7 +4,6 @@ import { ImpotRevenuModel } from './ImpotRevenuModel';
 import { TvaModel } from './TvaModel';
 
 export class SyntheseFacturationModel {
-
     constructor() {
         this.facture = new FactureModel();
         this.tva = new TvaModel();

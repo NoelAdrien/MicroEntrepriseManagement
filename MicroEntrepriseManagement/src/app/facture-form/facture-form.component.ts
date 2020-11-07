@@ -15,26 +15,36 @@ export class FactureFormComponent implements OnInit {
 
   @Input() syntheseFacture: SyntheseFacturationModel;
   @Input() isActionAdd: boolean;
-  @Output() reloadFactureMethod = new EventEmitter<string>();
+  @Output() reloadFactureMethod = new EventEmitter<boolean>();
+
+  public dateDateFacturationForm: Date;
+  public dateEncaissementForm: Date;
 
   ngOnInit(): void {
   }
 
   public addFacture(): void {
+    this.setFacturationDates();
     this.facturationService.addFacture(this.syntheseFacture);
-    this.reloadFactureMethod.emit();
+    this.reloadFactureMethod.next(true);
   }
 
   public updateFacture(): void {
+    this.setFacturationDates();
     this.facturationService.updateFacture(this.syntheseFacture);
   }
 
   public formatDate(event: string, isDateFacturation: boolean): void {
     var dates: any[] = event.split('/');
     if (isDateFacturation) {
-      this.syntheseFacture.facture.dateFacturation = new Date(dates[2] as number, dates[1] as number - 1, dates[0] as number);
+      this.dateDateFacturationForm = new Date(dates[2] as number, dates[1] as number - 1, dates[0] as number);
     } else {
-      this.syntheseFacture.facture.dateEncaissement = new Date(dates[2] as number, dates[1] as number - 1, dates[0] as number);
+      this.dateEncaissementForm = new Date(dates[2] as number, dates[1] as number - 1, dates[0] as number);
     }
+  }
+
+  private setFacturationDates(): void {
+    this.syntheseFacture.facture.dateFacturation = this.dateDateFacturationForm;
+    this.syntheseFacture.facture.dateEncaissement = this.dateEncaissementForm;
   }
 }
