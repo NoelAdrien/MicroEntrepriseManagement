@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
+import { AuthentificationService } from '../shared/Services/authentification.service';
 import { MenuModel } from './Models/menu-model';
 
 @Component({
@@ -11,12 +13,27 @@ export class MenuComponent implements OnInit {
   public menus: Array<MenuModel>;
   public title = "MicroEntrepriseManagement";
 
-  constructor() {
+  public isAuthenticated: boolean;
+
+  constructor(private authService: AuthentificationService) {
     this.menus = new Array<MenuModel>();
     this.initMenus();
   }
 
   ngOnInit(): void {
+    firebase.default.auth().onAuthStateChanged(
+      (user) => {
+        if(user) {
+          this.isAuthenticated = true;
+        } else {
+          this.isAuthenticated = false;
+        }
+      }
+    );
+  }
+
+  public signout(): void {
+    this.authService.signOutUser();
   }
 
   public initMenus(): void {

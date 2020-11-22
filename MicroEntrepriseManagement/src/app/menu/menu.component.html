@@ -13,9 +13,23 @@
                 </li>
             </ul>
         </div>
+        <!-- Authentification -->
+        <div>
+            <div style="color: white;">
+                <button *ngIf="!isAuthenticated" type="button" class="btn btn-primary" data-toggle="modal" data-target="#signin-modal">
+                    Connexion
+                </button>
+                <button *ngIf="isAuthenticated" (click)="signout()" type="button" class="btn btn-primary">
+                    Déconnexion
+                </button>
+            </div>
+        </div>
     </nav>
 </header>
-<br/>
-<br/>
-<br/>
-<br/>
+
+<app-signin></app-signin>
+
+<br />
+<br />
+<br />
+<br />

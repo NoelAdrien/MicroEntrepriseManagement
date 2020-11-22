@@ -18,6 +18,12 @@ import localeFr from '@angular/common/locales/fr';
 import { TvaComponent } from './tva/tva.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts/release/ngx-charts.module';
 
+// FireBase configuration
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { SigninComponent } from './signin/signin/signin.component';
+
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -28,9 +34,12 @@ registerLocaleData(localeFr);
     EncaissementComponent,
     PricesPipe,
     FactureFormComponent,
-    TvaComponent
+    TvaComponent,
+    SigninComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
