@@ -18,11 +18,16 @@
                 <input type="password" class="form-control" id="password" placeholder="Mot de passe" name="password" [(ngModel)]="password">
             </div>
             <div class="modal-footer">
-                <a *ngIf="isConnexion" (click)=changeFormType() href="#">Créer un compte</a>
-                <a *ngIf="!isConnexion" (click)=changeFormType() href="#">Connexion</a>
+                <div *ngIf="isConnexion">
+                    <button class="btn btn-success" type="button" (click)=changeFormType()>Créer un compte</button>
+                    <button (click)="submitConnexionForm()" type="button" class="btn btn-primary">Connexion</button>
+                </div>
+                <div *ngIf="!isConnexion">
+                    <button class="btn btn-success" type="button" (click)=changeFormType()>Connexion</button>
+                    <button (click)="submitConnexionForm()" type="button" class="btn btn-primary">Créer un compte</button>
+                </div>
+                
                 <button type="button" #closeButton class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                <button *ngIf="isConnexion" (click)="submitForm()" type="button" class="btn btn-primary">Connexion</button>
-                <button *ngIf="!isConnexion" (click)="submitForm()" type="button" class="btn btn-primary">Créer un compte</button>
             </div>
         </div>
     </div>

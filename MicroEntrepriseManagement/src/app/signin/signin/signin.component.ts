@@ -22,15 +22,37 @@ export class SigninComponent implements OnInit {
     this.isConnexion = !this.isConnexion;
   }
 
-  public submitForm(): void {
-    console.log(this.email);
+  public submitConnexionForm(): void {
     if (this.isConnexion) {
-      this.authService.signInUser(this.email, this.password);
-      this.closebutton.nativeElement.click();
-      return;
+      this.connexion();
+    } else {
+      this.createNewUser();
     }
 
-    this.authService.createNewUser(this.email, this.password);
     this.closebutton.nativeElement.click();
+  }
+
+  private createNewUser(): void {
+    this.authService.createNewUser(this.email, this.password).then(
+      () => {
+        // this.router.navigate(['/books']);
+        console.log('création compte success')
+      },
+      (error) => {
+        // this.errorMessage = error;
+        console.log(`Erreur création compte : ${error}`);
+      }
+    );
+  }
+
+  private connexion(): void {
+    this.authService.signInUser(this.email, this.password).then(
+      () => {
+        console.log('Connexion OK');
+      },
+      (error) => {
+        console.log(`Erreur connexion : ${error}`);
+      }
+    );
   }
 }
