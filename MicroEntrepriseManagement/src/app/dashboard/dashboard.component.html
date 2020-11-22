@@ -1,7 +1,28 @@
-<p>dashboard works!</p>
-
-<p>Selon le mois, indiquer quelle est le montant à déclarer (selon date facture du mois précédent</p>
+<p>Selon le mois, indiquer quelle est le montant à déclarer (selon date facture du mois précédent)</p>
 <p>Indiquer le chiffre d'affaire de l'année en cours, année précédente</p>
 <p>Menu ou info CFE</p>
 <p>Avis de déclaration CFE dispo en novembre (autour du 7 Novembre), et la date limite de paiement est au 15/12/2020</p>
 <p>historique de déclaration de paiement du CFE</p>
+<p>Graphiques</p>
+
+<div>
+    <div style="float: left;">
+        <select style="float: left;" class="custom-select" [(ngModel)]="selectedYear" (ngModelChange)="factureHtVerticalBar()">
+            <option *ngFor="let annee of anneeFactures" [ngValue]="annee">{{annee}}</option>
+        </select>
+    </div>
+    <ngx-charts-bar-vertical [view]="facturesHtBar.view" [scheme]="facturesHtBar.colorScheme"
+        [results]="facturesHtBar.data" [gradient]="facturesHtBar.gradient" [xAxis]="facturesHtBar.showXAxis"
+        [yAxis]="facturesHtBar.showYAxis" [legend]="facturesHtBar.showLegend"
+        [showXAxisLabel]="facturesHtBar.showXAxisLabel" [showYAxisLabel]="facturesHtBar.showYAxisLabel"
+        [xAxisLabel]="facturesHtBar.xAxisLabel" [yAxisLabel]="facturesHtBar.yAxisLabel">
+    </ngx-charts-bar-vertical>
+</div>
+
+<div>
+    <ngx-charts-pie-chart [view]="beneficesCharts.view" [scheme]="beneficesCharts.colorScheme"
+        [results]="beneficesCharts.data" [gradient]="beneficesCharts.gradient" [legend]="beneficesCharts.showLegend"
+        [legendPosition]="beneficesCharts.legendPosition" [labels]="beneficesCharts.showLabels"
+        [doughnut]="beneficesCharts.isDoughnut">
+    </ngx-charts-pie-chart>
+</div>

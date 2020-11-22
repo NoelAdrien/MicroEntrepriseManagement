@@ -16,6 +16,7 @@ import { PricesPipe } from './shared/Pipes/PricesPipe';
 
 import localeFr from '@angular/common/locales/fr';
 import { TvaComponent } from './tva/tva.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts/release/ngx-charts.module';
 
 registerLocaleData(localeFr);
 
@@ -30,10 +31,11 @@ registerLocaleData(localeFr);
     TvaComponent
   ],
   imports: [
-    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: "fr-FR" }],
   bootstrap: [AppComponent]
